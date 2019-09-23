@@ -571,6 +571,7 @@ AffineLogStackTransform< TElastix >
   rdregion.SetIndex( rdindex );
   rdregion.SetSize( rdsize );
   dummyImage->SetRegions( rdregion );
+  rdorigin.Fill( 0.0 );
   dummyImage->SetOrigin( rdorigin );
   dummyImage->SetSpacing( rdspacing );
   dummyImage->SetDirection( rddirection );
