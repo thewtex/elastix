@@ -40,6 +40,10 @@
 #include <sstream>
 #include <typeinfo>
 
+#ifndef CL_TARGET_OPENCL_VERSION
+#  define CL_TARGET_OPENCL_VERSION 120
+#endif
+
 namespace itk
 {
 /** Get the local block size based on the desired Image Dimension
