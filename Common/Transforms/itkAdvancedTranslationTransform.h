@@ -53,7 +53,7 @@ template<
 class TScalarType        = double,   // Data type for scalars (float or double)
 unsigned int NDimensions = 3 >
 // Number of dimensions
-class ITK_EXPORT AdvancedTranslationTransform :
+class ITK_TEMPLATE_EXPORT AdvancedTranslationTransform :
   public         AdvancedTransform< TScalarType, NDimensions, NDimensions >
 {
 public:
@@ -235,7 +235,7 @@ public:
    */
   TransformCategoryType GetTransformCategory() const override
   {
-    return Self::Linear;
+    return TransformCategoryType::Linear;
   }
 
 

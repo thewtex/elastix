@@ -253,12 +253,12 @@ AdvancedCombinationTransform< TScalarType, NDimensions >
   const bool isLinearTransform = this->IsLinear();
   if( isLinearTransform )
   {
-    return Self::Linear;
+    return TransformCategoryType::Linear;
   }
 
   // It is unclear how you would prefer to define the rest of them,
   // lets just return Self::UnknownTransformCategory for now
-  return Self::UnknownTransformCategory;
+  return TransformCategoryType::UnknownTransformCategory;
 }
 
 

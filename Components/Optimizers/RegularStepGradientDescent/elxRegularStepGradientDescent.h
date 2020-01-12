@@ -93,6 +93,8 @@ public:
   typedef Superclass1::CostFunctionType    CostFunctionType;
   typedef Superclass1::CostFunctionPointer CostFunctionPointer;
 
+  using StopConditionType = Superclass1::Superclass::StopConditionEnum;
+
   /** Typedef's inherited from Elastix.*/
   typedef typename Superclass2::ElastixType          ElastixType;
   typedef typename Superclass2::ElastixPointer       ElastixPointer;
