@@ -121,8 +121,7 @@ AdvancedRigid2DTransform< TScalarType >
 {
   // Extract the orthogonal part of the matrix
   //
-  vnl_matrix< TScalarType > p( 2, 2 );
-  p = this->GetMatrix().GetVnlMatrix();
+  vnl_matrix_fixed<double, 2, 2> p = this->GetMatrix().GetVnlMatrix();
   vnl_svd< TScalarType >    svd( p );
   vnl_matrix< TScalarType > r( 2, 2 );
   r = svd.U() * svd.V().transpose();
