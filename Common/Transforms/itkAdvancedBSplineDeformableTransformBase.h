@@ -75,7 +75,7 @@ public:
     InputCovariantVectorType;
   typedef typename Superclass::OutputCovariantVectorType
     OutputCovariantVectorType;
-  typedef typename Superclass::TransformCategoryType TransformCategoryType;
+  typedef typename Superclass::TransformCategoryEnum TransformCategoryType;
 
   typedef typename Superclass
     ::NonZeroJacobianIndicesType NonZeroJacobianIndicesType;
@@ -272,7 +272,7 @@ public:
    */
   TransformCategoryType GetTransformCategory( void ) const override
   {
-    return Self::BSpline;
+    return TransformCategoryType::BSpline;
   }
 
 

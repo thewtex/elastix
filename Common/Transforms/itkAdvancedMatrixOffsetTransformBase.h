@@ -390,7 +390,7 @@ public:
    */
   TransformCategoryType GetTransformCategory() const override
   {
-    return Self::Linear;
+    return TransformCategoryType::Linear;
   }
 
 

@@ -124,6 +124,8 @@ public:
   typedef typename Superclass::InputPointType      InputPointType;
   typedef typename Superclass::OutputPointType     OutputPointType;
 
+  typedef typename Superclass::TransformCategoryEnum TransformCategoryType;
+
   typedef typename Superclass::InverseTransformBaseType    InverseTransformBaseType;
   typedef typename Superclass::InverseTransformBasePointer InverseTransformBasePointer;
 
