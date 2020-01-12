@@ -565,6 +565,7 @@ AffineLogStackTransform< TElastix >
   ReducedDimensionSpacingType   rdspacing;
   ReducedDimensionIndexType     rdindex;
   ReducedDimensionPointType     rdorigin;
+  rdorigin.Fill( 0.0 );
   ReducedDimensionSizeType      rdsize;
   ReducedDimensionDirectionType rddirection;
 
