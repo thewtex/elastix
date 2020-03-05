@@ -93,7 +93,11 @@ public:
   typedef Superclass1::CostFunctionType    CostFunctionType;
   typedef Superclass1::CostFunctionPointer CostFunctionPointer;
 
+#if ITK_VERSION_MAJOR >= 5 && ITK_VERSION_MINOR >=1
+  using StopConditionType = itk::RegularStepGradientDescentBaseOptimizerEnums::StopConditionRegularStepGradientDescentBaseOptimizer;
+#else
   using StopConditionType = Superclass1::Superclass::StopConditionEnum;
+#endif
 
   /** Typedef's inherited from Elastix.*/
   typedef typename Superclass2::ElastixType          ElastixType;
