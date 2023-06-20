@@ -107,7 +107,9 @@ ComputeImageExtremaFilter<TInputImage>::ThreadedStreamedGenerateData(const Input
       RetrieveMinMax(*(this->GetInput()), regionForThread, m_ImageSpatialMask, m_SameGeometry);
 
     // Lock after calling RetrieveMinMax.
+#ifndef __wasi__
     const std::lock_guard<std::mutex> lockGuard(m_Mutex);
+#endif
     m_ThreadMin = std::min(minMaxResult.Min, m_ThreadMin);
     m_ThreadMax = std::max(minMaxResult.Max, m_ThreadMax);
   }
