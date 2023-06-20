@@ -25,7 +25,9 @@
 #include "itkDefaultStaticMeshTraits.h"
 #include "itkTransformMeshFilter.h"
 #include <itkMesh.h>
+#ifndef __wasm32__
 #include <itkMeshFileReader.h>
+#endif
 
 #include <fstream>
 #include <typeinfo>
@@ -350,6 +352,12 @@ unsigned int
 StatisticalShapePenalty<TElastix>::ReadShape(const std::string &              ShapeFileName,
                                              typename PointSetType::Pointer & pointSet)
 {
+#ifdef __wasm32__
+  const std::string message = "File IO not supported in WebAssembly builds.";
+  log::error(message);
+  itkExceptionMacro(<< message);
+  return 0;
+#else
   /** Typedef's. \todo test DummyIPPPixelType=bool. */
   using DummyIPPPixelType = double;
   using MeshTraitsType =
@@ -378,7 +386,7 @@ StatisticalShapePenalty<TElastix>::ReadShape(const std::string &              Sh
   pointSet = PointSetType::New();
   pointSet->SetPoints(mesh->GetPoints());
   return nrofpoints;
-
+#endif
 } // end ReadShape()
 
 
