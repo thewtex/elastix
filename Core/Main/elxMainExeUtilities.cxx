@@ -24,6 +24,10 @@
 #include <Core/elxVersionMacros.h>
 #include <itkMacro.h>
 
+#ifndef ELX_CMAKE_VERSION
+#define ELX_CMAKE_VERSION "Unknown"
+#endif
+
 // Standard Library header files:
 #include <cassert>
 #include <exception>
