@@ -179,20 +179,22 @@ endif()
 
 #---------------------------------------------------------------------
 # Create the elastix executable and library.
-add_executable(elastix_exe
-  Main/elastix.cxx
-  Main/elastix.h
-  Main/elxMainExeUtilities.cxx
-  Main/elxMainExeUtilities.h
-  Kernel/elxMainBase.cxx
-  Kernel/elxMainBase.h
-  Kernel/elxElastixMain.cxx
-  Kernel/elxElastixMain.h
-  ${InstallFilesForExecutables}
-)
-set_target_properties(elastix_exe PROPERTIES OUTPUT_NAME elastix)
-target_compile_definitions(elastix_exe PRIVATE ELX_CMAKE_VERSION="${CMAKE_VERSION}")
-target_link_libraries(elastix_exe ${ELASTIX_TARGET_LINK_LIBRARIES})
+if(NOT WASI AND NOT EMSCRIPTEN)
+  add_executable(elastix_exe
+    Main/elastix.cxx
+    Main/elastix.h
+    Main/elxMainExeUtilities.cxx
+    Main/elxMainExeUtilities.h
+    Kernel/elxMainBase.cxx
+    Kernel/elxMainBase.h
+    Kernel/elxElastixMain.cxx
+    Kernel/elxElastixMain.h
+    ${InstallFilesForExecutables}
+  )
+  set_target_properties(elastix_exe PROPERTIES OUTPUT_NAME elastix)
+  target_compile_definitions(elastix_exe PRIVATE ELX_CMAKE_VERSION="${CMAKE_VERSION}")
+  target_link_libraries(elastix_exe ${ELASTIX_TARGET_LINK_LIBRARIES})
+endif()
 
 # The library type (STATIC or SHARED) is determined by the parameter
 # BUILD_SHARED_LIBS.
@@ -216,20 +218,22 @@ target_link_libraries(elastix_lib ${ELASTIX_TARGET_LINK_LIBRARIES})
 #---------------------------------------------------------------------
 # Create the transformix executable.
 
-add_executable(transformix_exe
-  Main/transformix.cxx
-  Main/elastix.h
-  Main/elxMainExeUtilities.cxx
-  Main/elxMainExeUtilities.h
-  Kernel/elxMainBase.cxx
-  Kernel/elxMainBase.h
-  Kernel/elxTransformixMain.cxx
-  Kernel/elxTransformixMain.h
-  ${InstallFilesForExecutables}
-)
-set_target_properties(transformix_exe PROPERTIES OUTPUT_NAME transformix)
-target_compile_definitions(transformix_exe PRIVATE ELX_CMAKE_VERSION="${CMAKE_VERSION}")
-target_link_libraries(transformix_exe ${ELASTIX_TARGET_LINK_LIBRARIES})
+if(NOT WASI AND NOT EMSCRIPTEN)
+  add_executable(transformix_exe
+    Main/transformix.cxx
+    Main/elastix.h
+    Main/elxMainExeUtilities.cxx
+    Main/elxMainExeUtilities.h
+    Kernel/elxMainBase.cxx
+    Kernel/elxMainBase.h
+    Kernel/elxTransformixMain.cxx
+    Kernel/elxTransformixMain.h
+    ${InstallFilesForExecutables}
+  )
+  set_target_properties(transformix_exe PROPERTIES OUTPUT_NAME transformix)
+  target_compile_definitions(transformix_exe PRIVATE ELX_CMAKE_VERSION="${CMAKE_VERSION}")
+  target_link_libraries(transformix_exe ${ELASTIX_TARGET_LINK_LIBRARIES})
+endif()
 
 # The library type (STATIC or SHARED) is determined by the parameter
 # BUILD_SHARED_LIBS.
@@ -254,13 +258,13 @@ set(ELASTIX_LIBRARIES elastix_lib transformix_lib PARENT_SCOPE)
 #---------------------------------------------------------------------
 # Define the install directory for elastix and transformix.
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT WASI AND NOT EMSCRIPTEN)
   # Tell the executables where to find the required .so files.
   set_target_properties(elastix_exe transformix_exe
     PROPERTIES INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib:${ITK_DIR}")
 endif()
 
-if(NOT ELASTIX_NO_INSTALL_EXECUTABLES)
+if(NOT ELASTIX_NO_INSTALL_EXECUTABLES AND NOT WASI AND NOT EMSCRIPTEN)
   install(TARGETS elastix_exe transformix_exe
     ARCHIVE DESTINATION ${ELASTIX_ARCHIVE_DIR}
     LIBRARY DESTINATION ${ELASTIX_LIBRARY_DIR}
