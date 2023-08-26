@@ -40,7 +40,9 @@
 
 #include "elxLibUtilities.h"
 
+#ifndef __wasm32__
 #include <itkTransformFileWriter.h>
+#endif
 
 #include <algorithm> // For find.
 #include <memory>    // For unique_ptr.
@@ -268,6 +270,7 @@ ElastixRegistrationMethod<TFixedImage, TMovingImage>::GenerateData()
         {
           const auto transformFileName = "InitialTransform." + std::to_string(i) + '.' + outputFileNameExtension;
 
+#ifndef __wasm32__
           // Write the external transform to file.
           const auto writer = itk::TransformFileWriter::New();
           writer->SetInput(externalTransform);
@@ -278,6 +281,7 @@ ElastixRegistrationMethod<TFixedImage, TMovingImage>::GenerateData()
           transformFound->second = { "File" };
           transformParameterMap["TransformFileName"] = { transformFileName };
           transformParameterMap.erase("TransformAddress");
+#endif
         }
       }
 
