@@ -68,11 +68,11 @@ TransformixFilter<TImage>::GenerateData()
   using elx::LibUtilities::SetParameterValueAndWarnOnOverride;
 
   if (this->IsEmpty(this->GetMovingImage()) && m_FixedPointSetFileName.empty() && !m_ComputeSpatialJacobian &&
-      !m_ComputeDeterminantOfSpatialJacobian && !m_ComputeDeformationField)
+      !m_ComputeDeterminantOfSpatialJacobian && !m_ComputeDeformationField && !m_InputMesh)
   {
-    itkExceptionMacro(
-      "Expected at least one of SetMovingImage(), SetFixedPointSetFileName() ComputeSpatialJacobianOn(), "
-      "ComputeDeterminantOfSpatialJacobianOn() or ComputeDeformationFieldOn(), to be active.\"");
+    itkExceptionMacro("Expected at least one of SetMovingImage(), SetInputMesh(), SetFixedPointSetFileName(), "
+                      "ComputeSpatialJacobianOn(), ComputeDeterminantOfSpatialJacobianOn() or "
+                      "ComputeDeformationFieldOn(), to be active.");
   }
 
   // TODO: Patch upstream transformix to split this into seperate arguments
